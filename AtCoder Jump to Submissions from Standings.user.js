@@ -17,5 +17,9 @@ $(function() {
 
     $(document).on('dblclick', '.standings-result', function() {
         alert('double click');
+
+        setTimeout(function() {
+            location.href = 'submissions?f.Task=abc153_f&f.Language=&f.Status=AC&f.User=';
+        }, 250)
     });
 })();
