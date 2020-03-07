@@ -36,8 +36,6 @@ $(function() {
         // A問題がindex = 0となるようにしている
         $clickedRow -= 3
 
-        // TODO: 順位表の範囲外(0未満 or 問題数 + 1以上)なら以降は計算しない
-
         const $taskUrls = $('body').find('thead a');
         let $taskId = '';
 
@@ -54,8 +52,11 @@ $(function() {
         const $standings = $(this).siblings('td');
         const $username = $standings.find('.username span').text();
 
-        setTimeout(function() {
-            location.href = `${$prefix}submissions?f.Task=abc153_f&f.Language=&f.Status=AC&f.User=${$username}`;
-        }, 250)
+        // 順位表の範囲外なら、提出ページに遷移しない
+        if ($clickedRow < $taskUrls.length) {
+            setTimeout(function() {
+                location.href = `${$prefix}submissions?f.Task=${$taskId}&f.Language=&f.Status=AC&f.User=${$username}`;
+            }, 250)
+        }
     });
 })();
