@@ -16,11 +16,11 @@ $(function() {
     'use strict';
 
     $(document).on('dblclick', '.standings-result', function() {
-        const $includingVirutal = $('body').find('script:contains("isVirtual =  true")')[0]
+        const $standingsType = getStandingsType($('body'));
 
-        const $prefix = addPrefixIfNeeds($includingVirutal);
+        const $prefix = addPrefixIfNeeds($standingsType);
 
-        const $clickedColumnIndex = getClickedColumnIndex(this, $includingVirutal);
+        const $clickedColumnIndex = getClickedColumnIndex(this, $standingsType);
         const $taskUrls = $('body').find('thead a');
         const $taskId = getTaskId($taskUrls, $clickedColumnIndex);
 
@@ -33,10 +33,28 @@ $(function() {
     });
 })();
 
-function addPrefixIfNeeds(includingVirutal) {
+function getStandingsType(object) {
+    let $standingsType = '';
+    let isVirtual = $(object).find('script:contains("virtual")')[0];
+    let isMultiply = $(object).find('script:contains("multiply_ranks")')[0];
+
+    // HACK: if分岐はメンテナンス的によくないかも
+    // HACK: 他の言語のEnumに相当する構文がデフォルトで存在しない?
+    if (isVirtual) {
+        $standingsType = 'virtual';
+    } else if (isMultiply) {
+        $standingsType = 'multiply';
+    } else {
+        $standingsType = 'general';
+    }
+
+    return $standingsType
+}
+
+function addPrefixIfNeeds(standingsType) {
     let prefix = '';
 
-    if (includingVirutal) {
+    if (standingsType != 'general') {
         prefix = '../';
     }
 
@@ -61,12 +79,12 @@ function getTaskId(taskUrls, clickedColumnIndex) {
 
 // HACK: 順位表の列数に応じた処理をしているため、AtCoderのUIが変更されると動かなくなる可能性がある
 // WHY : 順位表の得点の欄に、問題のIDが含まれていないため
-function getClickedColumnIndex(object, includingVirutal) {
+function getClickedColumnIndex(object, standingsType) {
     let $clickedColumnIndex = $(object)[0].cellIndex;
 
     // コンテスト当日の順位表とバーチャル順位表の列の並びに違いがある
     // 当日の順位表の並びに合わせる
-    if (includingVirutal) {
+    if (standingsType == 'virtual') {
         $clickedColumnIndex -= 1
     }
 
