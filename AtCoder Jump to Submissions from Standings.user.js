@@ -24,23 +24,23 @@ $(function() {
             $prefix = '../';
         }
 
-        let $clickedRow = $(this)[0].cellIndex;
+        let $clickedColumn = $(this)[0].cellIndex;
 
         // コンテスト当日の順位表とバーチャル順位表の列の並びに違いがある
         // 当日の順位表の並びに合わせる
         if ($includingVirutal) {
-            $clickedRow -= 1
+            $clickedColumn -= 1
         }
 
         // 順位とユーザ名の欄を扱わずに済むようにインデックスを補正
         // A問題がindex = 0となるようにしている
-        $clickedRow -= 3
+        $clickedColumn -= 3
 
         const $taskUrls = $('body').find('thead a');
         let $taskId = '';
 
         $taskUrls.each((index) => {
-            if (index == $clickedRow) {
+            if (index == $clickedColumn) {
                 const $url = $taskUrls[index].pathname;
                 const $elements = $url.split('/');
                 const $length = $elements.length;
@@ -53,7 +53,7 @@ $(function() {
         const $username = $standings.find('.username span').text();
 
         // 順位表の範囲外なら、提出ページに遷移しない
-        if ($clickedRow < $taskUrls.length) {
+        if ($clickedColumn < $taskUrls.length) {
             setTimeout(function() {
                 location.href = `${$prefix}submissions?f.Task=${$taskId}&f.Language=&f.Status=AC&f.User=${$username}`;
             }, 250)
