@@ -16,11 +16,18 @@ $(function() {
     'use strict';
 
     $(document).on('dblclick', '.standings-result', function() {
+        const $includingVirutal = $('body').find('script:contains("isVirtual =  true")')[0]
+        let $prefix = '';
+
+        if ($includingVirutal) {
+            $prefix = '../';
+        }
+
         const $standings = $(this).siblings('td');
         const $username = $standings.find('.username span').text();
 
         setTimeout(function() {
-            location.href = 'submissions?f.Task=abc153_f&f.Language=&f.Status=AC&f.User=';
+            location.href = `${$prefix}submissions?f.Task=abc153_f&f.Language=&f.Status=AC&f.User=${$username}`;
         }, 250)
     });
 })();
