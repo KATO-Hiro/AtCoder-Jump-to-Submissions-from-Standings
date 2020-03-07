@@ -16,7 +16,8 @@ $(function() {
     'use strict';
 
     $(document).on('dblclick', '.standings-result', function() {
-        alert('double click');
+        const $standings = $(this).siblings('td');
+        const $username = $standings.find('.username span').text();
 
         setTimeout(function() {
             location.href = 'submissions?f.Task=abc153_f&f.Language=&f.Status=AC&f.User=';
