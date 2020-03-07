@@ -15,48 +15,77 @@
 $(function() {
     'use strict';
 
-    // FIXME: 肥大化してきたため、リファクタリングが必要
     $(document).on('dblclick', '.standings-result', function() {
         const $includingVirutal = $('body').find('script:contains("isVirtual =  true")')[0]
-        let $prefix = '';
 
-        if ($includingVirutal) {
-            $prefix = '../';
-        }
+        const $prefix = addPrefixIfNeeds($includingVirutal);
 
-        let $clickedColumn = $(this)[0].cellIndex;
-
-        // コンテスト当日の順位表とバーチャル順位表の列の並びに違いがある
-        // 当日の順位表の並びに合わせる
-        if ($includingVirutal) {
-            $clickedColumn -= 1
-        }
-
-        // 順位とユーザ名の欄を扱わずに済むようにインデックスを補正
-        // A問題がindex = 0となるようにしている
-        $clickedColumn -= 3
-
+        const $clickedColumnIndex = getClickedColumnIndex(this, $includingVirutal);
         const $taskUrls = $('body').find('thead a');
-        let $taskId = '';
+        const $taskId = getTaskId($taskUrls, $clickedColumnIndex);
 
-        $taskUrls.each((index) => {
-            if (index == $clickedColumn) {
-                const $url = $taskUrls[index].pathname;
-                const $elements = $url.split('/');
-                const $length = $elements.length;
-
-                $taskId = $elements[$length - 1]; // 0-indexed
-            }
-        });
-
-        const $standings = $(this).siblings('td');
-        const $username = $standings.find('.username span').text();
+        const $username = getUserName(this);
 
         // 順位表の範囲外なら、提出ページに遷移しない
-        if ($clickedColumn < $taskUrls.length) {
-            setTimeout(function() {
-                location.href = `${$prefix}submissions?f.Task=${$taskId}&f.Language=&f.Status=AC&f.User=${$username}`;
-            }, 250)
+        if ($clickedColumnIndex < $taskUrls.length) {
+            jumpToPersonalSubmissions($prefix, $taskId, $username);
         }
     });
 })();
+
+function addPrefixIfNeeds(includingVirutal) {
+    let prefix = '';
+
+    if (includingVirutal) {
+        prefix = '../';
+    }
+
+    return prefix
+}
+
+function getTaskId(taskUrls, clickedColumnIndex) {
+    let $taskId = '';
+
+    taskUrls.each((index) => {
+        if (index == clickedColumnIndex) {
+            const $url = taskUrls[index].pathname;
+            const $elements = $url.split('/');
+            const $length = $elements.length;
+
+            $taskId = $elements[$length - 1]; // 0-indexed
+        }
+    });
+
+    return $taskId
+}
+
+// HACK: 順位表の列数に応じた処理をしているため、AtCoderのUIが変更されると動かなくなる可能性がある
+// WHY : 順位表の得点の欄に、問題のIDが含まれていないため
+function getClickedColumnIndex(object, includingVirutal) {
+    let $clickedColumnIndex = $(object)[0].cellIndex;
+
+    // コンテスト当日の順位表とバーチャル順位表の列の並びに違いがある
+    // 当日の順位表の並びに合わせる
+    if (includingVirutal) {
+        $clickedColumnIndex -= 1
+    }
+
+    // 順位とユーザ名の欄を扱わずに済むようにインデックスを補正
+    // A問題がindex = 0となるようにしている
+    $clickedColumnIndex -= 3
+
+    return $clickedColumnIndex
+}
+
+function getUserName(object) {
+    const $standings = $(object).siblings('td');
+    const $username = $standings.find('.username span').text();
+
+    return $username
+}
+
+function jumpToPersonalSubmissions(prefix, taskId, username) {
+    setTimeout(function() {
+        location.href = `${prefix}submissions?f.Task=${taskId}&f.Language=&f.Status=AC&f.User=${username}`;
+    }, 250)
+}
