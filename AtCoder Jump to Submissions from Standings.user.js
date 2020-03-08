@@ -6,6 +6,7 @@
 // @match        https://atcoder.jp/contests/*/standings*
 // @require      https://code.jquery.com/jquery-3.4.1.min.js
 // @author       hiro_hiro
+// @license      MIT
 // @downloadURL  https://github.com/KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings/atcoder_jump_to_submissions_from_standings.js
 // @updateURL    https://github.com/KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings/atcoder_jump_to_submissions_from_standings.js
 // @supportURL   https://github.com/KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings/issues
