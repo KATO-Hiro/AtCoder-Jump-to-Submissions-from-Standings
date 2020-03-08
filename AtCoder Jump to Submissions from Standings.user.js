@@ -26,9 +26,13 @@ $(function() {
 
         const $username = getUserName(this);
 
+        const $displayLanguage = getDisplayLanguage($(location));
+        const $suffix = addSuffixIfNeeds($displayLanguage);
+
         // 順位表の範囲外なら、提出ページに遷移しない
         if ($clickedColumnIndex < $taskUrls.length) {
-            jumpToPersonalSubmissions($prefix, $taskId, $username);
+            // jumpToPersonalSubmissions($prefix, $taskId, $username);
+            jumpToPersonalSubmissions($prefix, $taskId, $username, $suffix);
         }
     });
 })();
@@ -102,8 +106,31 @@ function getUserName(object) {
     return $username
 }
 
-function jumpToPersonalSubmissions(prefix, taskId, username) {
+function getDisplayLanguage(location) {
+    let language = 'jp';
+    const params = location.attr('search');
+
+    if (params.match(/lang=en/)) {
+        language = 'en';
+    }
+
+   return language
+}
+
+function addSuffixIfNeeds($displayLanguage) {
+    let suffix = '&lang=';
+
+    if ($displayLanguage == 'en') {
+        suffix += 'en';
+    } else {
+        suffix = '';
+    }
+
+    return suffix
+}
+
+function jumpToPersonalSubmissions(prefix, taskId, username, suffix) {
     setTimeout(function() {
-        location.href = `${prefix}submissions?f.Task=${taskId}&f.Language=&f.Status=AC&f.User=${username}`;
+        location.href = `${prefix}submissions?f.Task=${taskId}&f.Language=&f.Status=AC&f.User=${username}${suffix}`;
     }, 250)
 }
