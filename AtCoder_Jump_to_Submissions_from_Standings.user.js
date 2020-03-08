@@ -7,8 +7,8 @@
 // @require      https://code.jquery.com/jquery-3.4.1.min.js
 // @author       hiro_hiro
 // @license      MIT
-// @downloadURL  https://github.com/KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings/atcoder_jump_to_submissions_from_standings.js
-// @updateURL    https://github.com/KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings/atcoder_jump_to_submissions_from_standings.js
+// @downloadURL  https://github.com/KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings/AtCoder_Jump_to_Submissions_from_Standings.user.js
+// @updateURL    https://github.com/KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings/AtCoder_Jump_to_Submissions_from_Standings.user.js
 // @supportURL   https://github.com/KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings/issues
 // @grant        none
 // ==/UserScript==
