@@ -8,7 +8,7 @@ This user script was inspired by [Codeforces](https://codeforces.com/) standings
 
 *** DEMO ***
 
-Comming soon.
+![](images/atcoder_jump_to_submissions_from_standings.gif)
 
 ## Features
 
@@ -23,10 +23,9 @@ Comming soon.
 
 ## Getting started
 
-### Requirement
-
 1. Install userscirpt manager ([Tampermonkey](https://www.tampermonkey.net/)) in your browser.
-2. Install [Me]().
+2. Install [Me](https://greasyfork.org/ja/scripts/397528-atcoder-jump-to-submissions-from-standings).
+3. Click Tampermokey icon, turn on the userscript "Enabled" in dashboard.
 
 ### Usage
 
