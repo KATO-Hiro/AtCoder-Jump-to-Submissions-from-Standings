@@ -5,6 +5,8 @@
 // @description  順位表の得点をダブルクリックすると、該当するコンテスタントの実装を見ることができます。
 // @match        https://atcoder.jp/contests/*/standings*
 // @require      https://code.jquery.com/jquery-3.4.1.min.js
+// @require      https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js
+// @require      https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js
 // @author       hiro_hiro
 // @license      MIT
 // @downloadURL  https://github.com/KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings/AtCoder_Jump_to_Submissions_from_Standings.user.js
