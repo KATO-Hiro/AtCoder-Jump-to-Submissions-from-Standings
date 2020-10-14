@@ -17,6 +17,8 @@ This user script was inspired by [Codeforces](https://codeforces.com/) standings
     - Standings
     - Virtual Standings
     - Standings (Mult)
+    - Team Standings
+      - Note: Show only individual participation.
   - Relationships between scores and submissions
     - Total Score    : All of the contestant.
     - Task A, B, ... : Task A, B, ... only.
