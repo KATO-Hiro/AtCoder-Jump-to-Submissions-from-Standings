@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AtCoder Jump to Submissions from Standings
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.1.1
 // @description  順位表の得点をダブルクリックすると、該当するコンテスタントの実装を見ることができます。
 // @match        https://atcoder.jp/contests/*/standings*
 // @require      https://code.jquery.com/jquery-3.4.1.min.js
@@ -13,10 +13,10 @@
 // @grant        none
 // ==/UserScript==
 
-$(function() {
+$(function () {
     'use strict';
 
-    $(document).on('dblclick', '.standings-result', function() {
+    $(document).on('dblclick', '.standings-result', function () {
         const $standingsType = getStandingsType($('body'));
 
         const $prefix = addPrefixIfNeeds($standingsType);
@@ -32,6 +32,7 @@ $(function() {
 
         // 順位表の範囲外なら、提出ページに遷移しない
         if ($clickedColumnIndex < $taskUrls.length) {
+            // TODO: Remove old code
             // jumpToPersonalSubmissions($prefix, $taskId, $username);
             jumpToPersonalSubmissions($prefix, $taskId, $username, $suffix);
         }
@@ -42,6 +43,7 @@ function getStandingsType(object) {
     let $standingsType = '';
     let isVirtual = $(object).find('script:contains("virtual")')[0];
     let isMultiply = $(object).find('script:contains("multiply_ranks")')[0];
+    let isTeam = $(object).find('script:contains("team")')[0];
 
     // HACK: if分岐はメンテナンス的によくないかも
     // HACK: 他の言語のEnumに相当する構文がデフォルトで存在しない?
@@ -49,6 +51,8 @@ function getStandingsType(object) {
         $standingsType = 'virtual';
     } else if (isMultiply) {
         $standingsType = 'multiply';
+    } else if (isTeam) {
+        $standingsType = 'team';
     } else {
         $standingsType = 'general';
     }
@@ -115,7 +119,7 @@ function getDisplayLanguage(location) {
         language = 'en';
     }
 
-   return language
+    return language
 }
 
 function addSuffixIfNeeds($displayLanguage) {
@@ -131,7 +135,7 @@ function addSuffixIfNeeds($displayLanguage) {
 }
 
 function jumpToPersonalSubmissions(prefix, taskId, username, suffix) {
-    setTimeout(function() {
+    setTimeout(function () {
         location.href = `${prefix}submissions?f.Task=${taskId}&f.Language=&f.Status=AC&f.User=${username}${suffix}`;
     }, 250)
 }
