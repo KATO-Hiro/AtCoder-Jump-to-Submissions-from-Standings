@@ -63,4 +63,4 @@ $ git clone git@github.com:KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings.
 
 ## License
 
-[MIT](http://KATO-Hiro.mit-license.org)
+[CC0](https://creativecommons.org/share-your-work/public-domain/cc0)
