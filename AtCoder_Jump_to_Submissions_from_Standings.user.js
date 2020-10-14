@@ -32,8 +32,6 @@ $(function () {
 
         // 順位表の範囲外なら、提出ページに遷移しない
         if ($clickedColumnIndex < $taskUrls.length) {
-            // TODO: Remove old code
-            // jumpToPersonalSubmissions($prefix, $taskId, $username);
             jumpToPersonalSubmissions($prefix, $taskId, $username, $suffix);
         }
     });
