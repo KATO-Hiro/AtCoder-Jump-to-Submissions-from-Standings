@@ -6,7 +6,7 @@ Jump to personal submissions from standings score in AtCoder.
 
 This user script was inspired by [Codeforces](https://codeforces.com/) standings page and [the tweet](https://twitter.com/jupijupi111/status/1220548897233231873).
 
-*** DEMO ***
+***DEMO***
 
 ![](images/atcoder_jump_to_submissions_from_standings.gif)
 
