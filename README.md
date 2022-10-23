@@ -15,6 +15,7 @@ This user script was inspired by [Codeforces](https://codeforces.com/) standings
 - Show personal AC codes when the standings score was double-clicked.
   - Standings type
     - Standings
+    - Extended Standings
     - Virtual Standings
     - Standings (Mult)
     - Team Standings

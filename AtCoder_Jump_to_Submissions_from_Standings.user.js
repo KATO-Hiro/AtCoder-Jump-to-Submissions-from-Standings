@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         AtCoder Jump to Submissions from Standings
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1
+// @version      0.2
 // @description  順位表の得点をダブルクリックすると、該当するコンテスタントの実装を見ることができます。
 // @match        https://atcoder.jp/contests/*/standings*
-// @require      https://code.jquery.com/jquery-3.4.1.min.js
+// @require      https://code.jquery.com/jquery-3.6.1.min.js
 // @author       hiro_hiro
 // @license      CC0
 // @downloadURL  https://github.com/KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings/AtCoder_Jump_to_Submissions_from_Standings.user.js
@@ -42,6 +42,7 @@ function getStandingsType(object) {
     let isVirtual = $(object).find('script:contains("virtual")')[0];
     let isMultiply = $(object).find('script:contains("multiply_ranks")')[0];
     let isTeam = $(object).find('script:contains("team")')[0];
+    let isExtended = $(object).find('script:contains("extended")')[0];
 
     // HACK: if分岐はメンテナンス的によくないかも
     // HACK: 他の言語のEnumに相当する構文がデフォルトで存在しない?
@@ -51,6 +52,8 @@ function getStandingsType(object) {
         $standingsType = 'multiply';
     } else if (isTeam) {
         $standingsType = 'team';
+    } else if (isExtended) {
+        $standingsType = 'extended';
     } else {
         $standingsType = 'general';
     }
@@ -89,9 +92,9 @@ function getTaskId(taskUrls, clickedColumnIndex) {
 function getClickedColumnIndex(object, standingsType) {
     let $clickedColumnIndex = $(object)[0].cellIndex;
 
-    // コンテスト当日の順位表とバーチャル順位表の列の並びに違いがある
+    // コンテスト当日の順位表と延長戦順位表・バーチャル順位表の列の並びに違いがある
     // 当日の順位表の並びに合わせる
-    if (standingsType == 'virtual') {
+    if (standingsType == 'virtual' || standingsType == 'extended') {
         $clickedColumnIndex -= 1
     }
 
