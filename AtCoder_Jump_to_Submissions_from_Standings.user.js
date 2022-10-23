@@ -4,7 +4,7 @@
 // @version      0.2
 // @description  順位表の得点をダブルクリックすると、該当するコンテスタントの実装を見ることができます。
 // @match        https://atcoder.jp/contests/*/standings*
-// @require      https://code.jquery.com/jquery-3.4.1.min.js
+// @require      https://code.jquery.com/jquery-3.6.1.min.js
 // @author       hiro_hiro
 // @license      CC0
 // @downloadURL  https://github.com/KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings/AtCoder_Jump_to_Submissions_from_Standings.user.js
