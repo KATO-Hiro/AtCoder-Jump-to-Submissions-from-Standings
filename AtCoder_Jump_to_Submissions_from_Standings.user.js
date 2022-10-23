@@ -44,8 +44,6 @@ function getStandingsType(object) {
     let isTeam = $(object).find('script:contains("team")')[0];
     let isExtended = $(object).find('script:contains("extended")')[0];
 
-    console.log(isExtended);
-
     // HACK: if分岐はメンテナンス的によくないかも
     // HACK: 他の言語のEnumに相当する構文がデフォルトで存在しない?
     if (isVirtual) {
