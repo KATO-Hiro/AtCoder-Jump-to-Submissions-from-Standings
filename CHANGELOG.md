@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2 / 2022-10-23
+
+- [#66](https://github.com/KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings/pull/66) - ヒューリスティックコンテストの「延長戦順位表」ページから、「提出結果」ページが見られるように修正。依存ライブラリをアップデート。
+
 ## 0.1.1 / 2020-10-14
 
 - [#58](https://github.com/KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings/pull/58), [#59](https://github.com/KATO-Hiro/AtCoder-Jump-to-Submissions-from-Standings/pull/59) - ライセンスをMITからCC0に変更。
